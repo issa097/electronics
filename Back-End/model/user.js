@@ -19,6 +19,12 @@ function Login(email, password) {
     return db.query(queryText, value)
 }
 
+function getUser(user_id) {
+    const queryText = 'select * from users where user_id =$1'
+    value = [user_id]
+    return db.query(queryText, value)
+}
+
 
 
 
@@ -30,5 +36,6 @@ function Login(email, password) {
 module.exports = {
     Register,
     GetEmail,
-    Login
+    Login,
+    getUser
 }

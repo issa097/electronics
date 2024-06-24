@@ -10,15 +10,29 @@ import {
 } from 'react-router-dom'
 import Register from './components/register';
 import Login from './components/Login';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import { UserProvider } from './usecontext/Usecontext';
+import Category from './page/Category';
+import Product from './page/Product';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/product" element={<Product />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+
+    </UserProvider>
   );
 }
 

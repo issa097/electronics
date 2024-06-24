@@ -38,6 +38,7 @@ const Login = async (req, res) => {
                 const Token = jwt.sign(
                     { user_id: userss.user_id, first_name: userss.first_name, last_name: userss.last_name, email: userss.email }, key
                 )
+                res.cookie('authToken', Token, { httpOnly: true });
                 return res.status(200).json({
                     userss, Token
 
@@ -57,12 +58,26 @@ const Login = async (req, res) => {
 }
 
 
+const getUser = async (req, res) => {
+    const user_id = req.user
+    try {
+        const getuser = await user.getUser(user_id)
+        return res.status(200).json(getuser.rows)
+    } catch (error) {
+        return res.status(400).json(error)
+    }
+
+
+}
+
+
 
 
 
 module.exports = {
     Register,
-    Login
+    Login,
+    getUser
 }
 
 

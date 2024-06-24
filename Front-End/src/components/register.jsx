@@ -7,10 +7,8 @@ function Register() {
         first_name: '',
         last_name: '',
         email: '',
-        photo: {
-            "newphoto1": "http://example.com/newphoto1.jpg",
-            "newphoto2": "http://example.com/newphoto2.jpg"
-        },
+        photo: { photo1: '' },
+
         age: '',
         password: '',
 
@@ -66,6 +64,12 @@ function Register() {
                                 <input value={user.email} onChange={(e) => {
                                     setuser({ ...user, email: e.target.value })
                                 }} type="email" name="email" id="email" placeholder="name@company.com" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            </div>
+                            <div>
+                                <label for="photo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">photo</label>
+                                <input value={user.photo.photo1} onChange={(e) => {
+                                    setuser({ ...user, photo: { photo1: e.target.value } })
+                                }} type="text" name="photo" id="photo" placeholder="photo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div>
                                 <label for="age" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">age</label>
