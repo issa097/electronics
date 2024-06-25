@@ -30,12 +30,10 @@ const getProducts = async (req, res) => {
 
     try {
         const result = await Products.getProducts()
-
-
         return res.status(200).json({ result: result.rows })
     } catch (error) {
+
         return res.status(500).json({ error: error })
-        console.log(error)
 
     }
 }

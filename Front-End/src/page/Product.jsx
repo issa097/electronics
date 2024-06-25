@@ -14,6 +14,7 @@ function Product() {
     useEffect(() => {
         products()
     }, [])
+    console.log(product)
 
 
     return (

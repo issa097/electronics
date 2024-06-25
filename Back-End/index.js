@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 app.use(express.json())
 app.use(cors())
 app.use(UserRouters)
+app.use(ProductRouters)
 app.use(CategoryRouters)
 
-app.use(ProductRouters)
 
 
 

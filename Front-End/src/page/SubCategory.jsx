@@ -1,39 +1,33 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import ProductForm from './ProductForm'
-import SubCategory from './SubCategory'
-import Text from '../components/Text'
-function Category() {
-    const [category, setcategory] = useState({
-        category_name: ''
+import axios from 'axios';
+import React, { useState } from 'react';
+
+function SubCategory() {
+    const [SubCategory, setSubCategory] = useState({
+        subcategory_name: ''
     })
-
-
-    const fetchData = async () => {
+    async function SubCategoryForms() {
         try {
-            const response = await axios.post("http://localhost:4000/insertCategory", category)
-
+            const response = await axios.post("http://localhost:4000/insertSubCategory", SubCategory);
 
         } catch (error) {
-            console.log(error)
+            console.error('Error adding product:', error);
         }
     }
-    useEffect(() => {
-    })
+
     return (
         <>
-            <Text>categoryForm</Text>
+
 
             <form onSubmit={(e) => {
                 e.preventDefault();
-                fetchData();
+                SubCategoryForms();
             }} className='max-w-sm mx-auto'>
                 <div>
-                    <label htmlFor="category-name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label htmlFor="SubCategory" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Category Name
                     </label>
-                    <input value={category.category_name} onChange={(e) => setcategory({ ...category, category_name: e.target.value })}
-                        type="text" name="category-name" id="category-name" placeholder="Category Name"
+                    <input value={SubCategory.subcategory_name} onChange={(e) => setSubCategory({ ...SubCategory, subcategory_name: e.target.value })}
+                        type="text" name="SubCategory" id="SubCategory" placeholder="Sub Category"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                 </div>
 
@@ -47,14 +41,10 @@ function Category() {
 
             </form>
 
-            <Text ProductForm="ProductForm" >ProductForm</Text>
 
-            <ProductForm />
-            <Text SubCategory="SubCategory" >SubCategory</Text>
-            <SubCategory />
+
         </>
     );
-
 }
 
-export default Category
+export default SubCategory;

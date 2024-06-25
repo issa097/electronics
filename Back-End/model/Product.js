@@ -37,9 +37,7 @@ function getProduct(category_id, sub_category) {
 
 }
 function getProducts() {
-    const queryText = "select * from product "
-
-    console.log("first")
+    const queryText = "select * from product where is_deleted = false"
     return db.query(queryText)
 
 }
