@@ -17,6 +17,20 @@ const getCategory = async (req, res) => {
     }
 }
 
+
+const getsubcategory = async (req, res) => {
+
+    try {
+
+        const result = await Category.getsubcategory()
+        return res.status(200).json({ result: result.rows })
+    } catch (error) {
+        return res.status(500).json({ error: error })
+        console.log(error)
+
+    }
+}
+
 const insertCategory = async (req, res) => {
 
     try {
@@ -44,6 +58,7 @@ const insertSubCategory = async (req, res) => {
 
 module.exports = {
     getCategory,
+    getsubcategory,
     insertCategory,
     insertSubCategory
 }

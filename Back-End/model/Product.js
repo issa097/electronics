@@ -37,7 +37,24 @@ function getProduct(category_id, sub_category) {
 
 }
 function getProducts() {
-    const queryText = "select * from product where is_deleted = false"
+    const queryText = `SELECT 
+    product.product_id, 
+    product.product_name, 
+    product.description, 
+    product.price, 
+    product.img_url, 
+    product.is_deleted, 
+    category.category_name as category_name, 
+    subcategory.subcategory_name as subcategory_name
+FROM 
+    product
+JOIN 
+    category ON product.category_id = category.category_id
+JOIN 
+    subcategory ON product.subcategory_id = subcategory.subcategory_id
+WHERE 
+    product.is_deleted = false;
+`
     return db.query(queryText)
 
 }

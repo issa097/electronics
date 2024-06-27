@@ -279,7 +279,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-    { name: 'category', href: '/category', current: true },
+    { name: 'Dashboard', href: '/category', current: true },
     { name: 'product', href: '/product', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
@@ -289,9 +289,9 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Nav() {
+export default function Nav({ isLoginOpen, setIsLoginOpen, setIsRegisterOpen, isRegisterOpen }) {
+
     const { users, setuserData } = useUser()
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
 
@@ -300,15 +300,14 @@ export default function Nav() {
             try {
                 axios.defaults.headers.common["Authorization"] = `${check()}`
                 const Response = await axios.get('http://localhost:4000/getUser')
-                const info = Response.data[0]
-                setuserData(info)
-                console.log("info", info)
+                const Userinfo = Response.data[0]
+                setuserData(Userinfo)
             } catch (error) {
                 console.log(error)
             }
         }
         fetchData()
-
+        check()
 
     }, [])
 
@@ -316,9 +315,7 @@ export default function Nav() {
         return localStorage.getItem('Token')
     }
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -407,22 +404,25 @@ export default function Nav() {
                                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <Link to="/login"
+                                                    <Link onClick={() => setIsLoginOpen(true)} to="/login"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Login
                                                     </Link>
+
                                                 )}
+
                                             </Menu.Item>
                                             <Menu.Item>
 
                                                 {({ active }) => (
-                                                    <Link to="/register"
+                                                    <Link onClick={() => setIsRegisterOpen(true)} to="/register"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         register
                                                     </Link>
                                                 )}
+
                                             </Menu.Item>
                                             <Menu.Item>
                                                 {({ active }) => (

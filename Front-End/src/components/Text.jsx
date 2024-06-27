@@ -1,8 +1,6 @@
 import React from 'react'
 
 function Text({ SubCategory, ProductForm, categoryForm, children }) {
-    const issa = [SubCategory, ProductForm, categoryForm]
-    console.log(issa)
     return (
         <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">

@@ -1,7 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useCat, useSubCat } from '../usecontext/Usecontext';
 
 function ProductForm() {
+
+    const { cat } = useCat()
+    const { subCat } = useSubCat()
+    console.log(cat)
     const [productForm, setProductForm] = useState({
         product_name: '',
         description: '',
@@ -95,8 +100,15 @@ function ProductForm() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                     <option value="">Select category</option>
-                    <option value="pc">PC</option>
-                    <option value="phone">Phone</option>
+
+                    {cat.map((cats) => (
+                        <>
+                            <option key={cats.category_id} value={cats.category_name}>{cats.category_name}</option>
+
+                        </>
+
+                    ))}
+
                 </select>
             </div>
             <div className="mb-5">
@@ -110,8 +122,14 @@ function ProductForm() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                     <option value="">Select subcategory</option>
-                    <option value="gaming">Gaming</option>
-                    <option value="honor">Honor</option>
+
+                    {subCat.map((subCats) => (
+                        <>
+                            <option key={subCats.subcategory_id} value={subCats.subcategory_name}>{subCats.subcategory_name}</option>
+
+                        </>
+
+                    ))}
                 </select>
             </div>
             <div className='flex items-center justify-center '>

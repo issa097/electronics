@@ -6,6 +6,11 @@ function getCategory() {
     return db.query(queryText)
 
 }
+function getsubcategory() {
+    const queryText = "select * from subcategory"
+    return db.query(queryText)
+
+}
 function insertCategory(category_name) {
     const queryText = "insert into category (category_name) values ($1) RETURNING*"
     const value = [category_name]
@@ -22,6 +27,7 @@ function insertSubCategory(category_name) {
 
 module.exports = {
     getCategory,
+    getsubcategory,
     insertCategory,
     insertSubCategory
 }

@@ -3,11 +3,33 @@ import React, { useEffect, useState } from 'react'
 import ProductForm from './ProductForm'
 import SubCategory from './SubCategory'
 import Text from '../components/Text'
+import { useCat, useSubCat } from '../usecontext/Usecontext';
+
 function Category() {
+
+    const { cat, setcatData } = useCat()
+    const { subCat, setSubcatData } = useSubCat()
+    console.log(cat)
+    console.log(subCat)
     const [category, setcategory] = useState({
         category_name: ''
     })
+    const getcategory = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/cat')
+            const responses = await axios.get('http://localhost:4000/getsubcategory')
+            const categoryInfo = await response.data.result
+            console.log(categoryInfo)
+            setcatData(categoryInfo)
 
+            const subCategoryInfo = await responses.data.result
+
+            setSubcatData(subCategoryInfo)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
     const fetchData = async () => {
         try {
@@ -19,7 +41,10 @@ function Category() {
         }
     }
     useEffect(() => {
-    })
+        getcategory()
+    }, [])
+
+
     return (
         <>
             <Text>categoryForm</Text>
