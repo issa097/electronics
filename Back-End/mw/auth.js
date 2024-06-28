@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const key = "issa"
 
 const auth = async (req, res, next) => {
-    // const token = req.headers.cookie;
-    // const auth = token.split("=")[1].trim();
+    // const Token = req.headers.cookie;
+    // const auth = Token.split("=")[1].trim();
     console.log(req.body)
     try {
         const Token = req.headers.authorization

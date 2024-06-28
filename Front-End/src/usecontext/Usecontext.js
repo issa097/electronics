@@ -80,3 +80,26 @@ export const SubCatProvider = ({ children }) => {
         </SubCatContext.Provider>
     );
 };
+const ProductContext = createContext();
+
+export const useProduct = () => {
+    const context = useContext(ProductContext);
+    if (!context) {
+        throw new Error('useOrder must be used within an OrderProvider');
+    }
+    return context;
+};
+
+export const ProductProvider = ({ children }) => {
+    const [productss, setproducts] = useState([]);
+
+    const productData = (data) => {
+        setproducts(data);
+    };
+
+    return (
+        <ProductContext.Provider value={{ productss, setproducts }}>
+            {children}
+        </ProductContext.Provider>
+    );
+};

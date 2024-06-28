@@ -36,6 +36,13 @@ function getProduct(category_id, sub_category) {
     return db.query(queryText, value)
 
 }
+function getProductById(product_id) {
+    const queryText = "select * from product where product_id=$1 "
+    const value = [product_id]
+    console.log(product_id)
+    return db.query(queryText, value)
+
+}
 function getProducts() {
     const queryText = `SELECT 
     product.product_id, 
@@ -69,5 +76,6 @@ WHERE
 module.exports = {
     InsertProduct,
     getProduct,
-    getProducts
+    getProducts,
+    getProductById
 }

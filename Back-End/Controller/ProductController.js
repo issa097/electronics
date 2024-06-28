@@ -26,6 +26,19 @@ const getProduct = async (req, res) => {
 
     }
 }
+const getProductById = async (req, res) => {
+
+    try {
+        const product_id = req.params.product_id
+
+        const result = await Products.getProductById(product_id)
+        return res.status(200).json({ result: result.rows })
+    } catch (error) {
+        return res.status(500).json({ error: error })
+        console.log(error)
+
+    }
+}
 const getProducts = async (req, res) => {
 
     try {
@@ -54,5 +67,6 @@ module.exports = {
     insertProduct,
     getProduct,
     getCategory,
-    getProducts
+    getProducts,
+    getProductById
 }
