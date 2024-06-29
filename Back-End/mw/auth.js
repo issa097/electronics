@@ -4,7 +4,6 @@ const key = "issa"
 const auth = async (req, res, next) => {
     // const Token = req.headers.cookie;
     // const auth = Token.split("=")[1].trim();
-    console.log(req.body)
     try {
         const Token = req.headers.authorization
         if (!Token) {

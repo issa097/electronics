@@ -38,7 +38,10 @@ const Login = async (req, res) => {
                 const Token = jwt.sign(
                     { user_id: userss.user_id, first_name: userss.first_name, last_name: userss.last_name, email: userss.email }, key
                 )
-                res.cookie('authToken', Token, { httpOnly: true });
+                await user.Active(userss.user_id);
+
+                res.cookie('Token', Token, { httpOnly: true });
+
                 return res.status(200).json({
                     userss, Token
 
@@ -55,6 +58,7 @@ const Login = async (req, res) => {
         console.log(error)
 
     }
+
 }
 
 
@@ -69,6 +73,38 @@ const getUser = async (req, res) => {
 
 
 }
+const getUsers = async (req, res) => {
+    try {
+        const getAlluser = await user.getUsers()
+        return res.status(200).json({ getAlluser: getAlluser.rows })
+    } catch (error) {
+        return res.status(400).json(error)
+    }
+
+
+}
+const deleteUsers = async (req, res) => {
+    const user_id = req.params.user_id
+    try {
+        const getuserid = await user.getUser(user_id)
+
+        if (!getuserid.rows.length) {
+            return res.status(404).json({ message: "User not found" });
+
+        } else {
+            const DeleteUser = await user.deleteUsers(user_id)
+            return res.status(200).json({ message: "User found", DeleteUser: DeleteUser.rows });
+        }
+
+
+
+
+    } catch (error) {
+        return res.status(400).json("User Is Un Deleted")
+    }
+
+
+}
 
 
 
@@ -77,7 +113,9 @@ const getUser = async (req, res) => {
 module.exports = {
     Register,
     Login,
-    getUser
+    getUser,
+    getUsers,
+    deleteUsers
 }
 
 
